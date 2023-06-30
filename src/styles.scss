@@ -3,3 +3,19 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import "styles/base";
+
+footer {
+  background-color: rgba(222, 222, 222, 0.56);
+  height:75px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  display : flex;
+}
+
+.a-footer-btn {
+  margin: 1em;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}

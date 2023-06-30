@@ -14,6 +14,7 @@ import { ConfirmButtonComponent } from "./shared/confirm-button/confirm-button.c
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { SequenceDirective } from './sequence.directive';
+import {HttpClientModule} from "@angular/common/http";
 
 const routes: Routes = [
   { path: 'home', component: RangeCalculatorComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     MatTabsModule,
