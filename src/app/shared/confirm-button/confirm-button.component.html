@@ -1,0 +1,16 @@
+<div class="a-confirm-btn">
+  <button mat-mini-fab color="primary"
+          aria-label="To delete, press this button and then confirm with the button on the left"
+          (click)="armButton()"
+          [disabled]="isArmed || disabled">
+    <mat-icon>delete</mat-icon>
+  </button>
+  <button mat-mini-fab color="warn"
+          aria-label="confirm delete"
+          [style.display]="!isArmed ? 'none' : 'block'"
+          (click)="fireButton()">
+    <mat-icon>check_circle</mat-icon>
+  </button>
+</div>
+
+

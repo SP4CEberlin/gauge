@@ -1,2 +1,10 @@
-<h1>{{percent}}</h1>
-<div #pixiContainerGauge></div>
+<nav mat-tab-nav-bar backgroundColor="primary" [tabPanel]="tabPanel">
+  <a mat-tab-link routerLink="/home" > Home </a>
+  <a mat-tab-link routerLink="/tours" > Tours </a>
+  <a mat-tab-link href="#" (click)="activeLink = 'C'" [active]="activeLink == 'C'"> Tab C </a>
+  <a mat-tab-link disabled>Settings</a>
+</nav>
+<mat-tab-nav-panel #tabPanel>
+  <router-outlet></router-outlet>
+</mat-tab-nav-panel>
+

@@ -1,0 +1,53 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>Rating</th>
+    <td mat-cell *matCellDef="let tour">
+      <mat-icon *sequence="tour.position" color="primary"> star </mat-icon>
+    </td>
+  </ng-container>
+
+  <!-- Title Column -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let tour">{{tour.title}}</td>
+  </ng-container>
+
+  <!-- Distance Column -->
+  <ng-container matColumnDef="distance">
+    <th mat-header-cell *matHeaderCellDef>Distance</th>
+    <td mat-cell *matCellDef="let tour">{{tour.distance}}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="tourDate">
+    <th mat-header-cell *matHeaderCellDef>Date</th>
+    <td mat-cell *matCellDef="let tour">{{tour.tourDate}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="trashbutton">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let tour; let i = index;">
+      <app-confirm-button
+        (deleteConfirm)="removeData(i)"
+        [executeData]="tour"
+        class="m-confirm-btn">
+      </app-confirm-button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="locbutton">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let tour; let i = index;">
+      <button mat-mini-fab color="primary"
+              aria-label="Set location."
+              [style.color]="currentLocation === i ? 'lime' : 'white'"
+              (click)="setLocation(i)">
+        <mat-icon>location_on</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
