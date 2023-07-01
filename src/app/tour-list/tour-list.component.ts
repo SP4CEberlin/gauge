@@ -1,45 +1,30 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import { MatButtonModule } from "@angular/material/button";
-import { MatTableModule } from "@angular/material/table";
+import { Component, OnInit } from '@angular/core';
 import { Observable, ReplaySubject } from "rxjs";
 import { DataSource } from "@angular/cdk/collections";
-import {GoogleMapsService} from "../google-maps.service";
-
-export interface Tour {
-  title: string;
-  position: number;
-  distance: string;
-  location: string;
-  x: number;
-  y: number;
-}
-
-const TOUR_DATA: Tour[] = [
-  {position: 3, title: 'Home', distance: "", location: '9F4MCGW4%2B4H', x:52.445437, y:13.506187},
-  {position: 3, title: 'Office', distance: "",  location: '9F4MCGV2%2BGX', x:52.443812,y:13.502562},
-  {position: 1, title: 'MilchBar', distance: "",  location: '9F4MFFHX%2BMG', x:52.478938,y:13.499063},
-  {position: 4, title: 'Sunspot Plänterwald', distance: "",  location: '9F4MFFPP%2BX9', x:52.487437,y:13.486688},
-  {position: 3, title: 'Sunspot Kaisersteg', distance: "",  location: '9F4MFG59%2B5V', x:52.458062,y:13.519687},
-  {position: 4, title: 'Eierhäuschen', distance: "",  location: '9F4MFFJV%2BGP', x:52.481437,y:13.494813},
-
-];
+import { GoogleMapsService } from "../service/google-maps.service";
+import {TourDataService} from "../service/tour-data.service";
+import {Tour} from "../interface/tour";
 
 @Component({
   selector: 'app-tour-list',
   templateUrl: './tour-list.component.html',
 })
 export class TourListComponent implements OnInit{
-  displayedColumns: string[] = ['position', 'title', 'distance', 'trashButton' , 'locButton'];
-  dataToDisplay = [...TOUR_DATA];
+  displayedColumns: string[] = [ 'locButton', 'position', 'title', 'distance', 'trashButton' ];
+  dataToDisplay: Tour[] = [];
   dataSource = new TourDataSource(this.dataToDisplay);
   currentLocation = 0;
   lat: number = 0;
   lng: number = 0;
 
-  constructor(private service: GoogleMapsService) {}
+  constructor(private service: GoogleMapsService, private tourDataService: TourDataService) {}
 
   ngOnInit(): void {
-    this.setLocation(this.currentLocation);
+    this.tourDataService.getTourData().subscribe(data => {
+      this.dataToDisplay = data;
+      this.dataSource.setData(this.dataToDisplay);
+      this.setLocation(this.currentLocation);
+    });
   }
 
   getUserLocation() {
@@ -64,11 +49,7 @@ export class TourListComponent implements OnInit{
     }
   }
 
-  addData() {
-    const randomElementIndex = Math.floor(Math.random() * TOUR_DATA.length);
-    this.dataToDisplay = [...this.dataToDisplay, TOUR_DATA[randomElementIndex]];
-    this.dataSource.setData(this.dataToDisplay);
-  }
+
 
   setLocation(i:number){
     this.currentLocation = i;

@@ -14,11 +14,16 @@ import { ConfirmButtonComponent } from "./shared/confirm-button/confirm-button.c
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { SequenceDirective } from './sequence.directive';
-import {HttpClientModule} from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
+import { TourAddComponent } from './tour-add/tour-add.component';
+import {MatInputModule} from "@angular/material/input";
+import {MatCardModule} from "@angular/material/card";
+import {ReactiveFormsModule} from "@angular/forms";
 
 const routes: Routes = [
   { path: 'home', component: RangeCalculatorComponent },
   { path: 'tours', component: TourListComponent },
+  { path: 'add', component: TourAddComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
@@ -29,7 +34,8 @@ const routes: Routes = [
     RangeCalculatorComponent,
     ConfirmButtonComponent,
     TourListComponent,
-    SequenceDirective
+    SequenceDirective,
+    TourAddComponent
 
   ],
   imports: [
@@ -41,7 +47,10 @@ const routes: Routes = [
     MatTabsModule,
     MatTableModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule,
+    MatCardModule,
+    ReactiveFormsModule
   ],
 
   providers: [],
