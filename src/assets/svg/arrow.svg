@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="265.376" height="70.282" viewBox="0 0 265.376 70.282">
   <g id="long-arrow-alt-right-solid" transform="translate(0 0)">
-    <path id="long-arrow-alt-right-solid-2" data-name="long-arrow-alt-right-solid" d="M192.32,167.87H7.108C3.183,167.87,0,169.555,0,171.632v17.555c0,2.077,3.183,3.762,7.108,3.762H192.32v16.892c0,6.7,8.958,7.606,17.914,2.866l50.978-26.978c5.552-2.938,5.552-7.7,0-10.64l-50.978-26.978c-8.956-4.739-17.914-3.1-17.914,3.6Z" transform="translate(0 -145.399)" fill="#ff6a6a"/>
+    <path id="long-arrow-alt-right-solid-2" data-name="long-arrow-alt-right-solid" d="M192.32,167.87H7.108C3.183,167.87,0,169.555,0,171.632v17.555c0,2.077,3.183,3.762,7.108,3.762H192.32v16.892c0,6.7,8.958,7.606,17.914,2.866l50.978-26.978c5.552-2.938,5.552-7.7,0-10.64l-50.978-26.978c-8.956-4.739-17.914-3.1-17.914,3.6Z" transform="translate(0 -145.399)" fill="#673ab7"/>
   </g>
 </svg>

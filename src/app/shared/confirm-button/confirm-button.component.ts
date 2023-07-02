@@ -3,8 +3,7 @@ import {timer} from "rxjs";
 
 @Component({
   selector: 'app-confirm-button',
-  templateUrl: './confirm-button.component.html',
-  styleUrls: ['./confirm-button.component.scss']
+  templateUrl: './confirm-button.component.html'
 })
 export class ConfirmButtonComponent {
 
