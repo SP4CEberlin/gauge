@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Observable, ReplaySubject } from "rxjs";
-import { DataSource } from "@angular/cdk/collections";
-import { GoogleMapsService } from "../service/google-maps.service";
+import {Observable, ReplaySubject} from "rxjs";
+import {DataSource} from "@angular/cdk/collections";
+import {GoogleMapsService} from "../service/google-maps.service";
 import {TourDataService} from "../service/tour-data.service";
 import {Tour} from "../interface/tour";
 
@@ -9,26 +9,27 @@ import {Tour} from "../interface/tour";
   selector: 'app-tour-list',
   templateUrl: './tour-list.component.html',
 })
-export class TourListComponent implements OnInit{
+export class TourListComponent implements OnInit {
 
   @Input() maxRange = 10;
   @Input() showControls = true;
 
 
-  displayedColumns = [ 'locButton', 'title', 'distance' ];
+  displayedColumns = ['locButton', 'title', 'distance'];
   dataToDisplay: Tour[] = [];
   dataSource = new TourDataSource(this.dataToDisplay);
   currentLocation = 0;
   lat: number = 0;
   lng: number = 0;
 
-  constructor(private service: GoogleMapsService, private tourDataService: TourDataService) {}
+  constructor(private service: GoogleMapsService, private tourDataService: TourDataService) {
+  }
 
   ngOnInit(): void {
 
     if (this.showControls) {
       // add more elements
-      this.displayedColumns = [ 'locButton', 'position', 'title', 'distance', 'trashButton' ];
+      this.displayedColumns = ['locButton', 'position', 'title', 'distance', 'trashButton'];
     }
 
 
@@ -37,6 +38,8 @@ export class TourListComponent implements OnInit{
       this.dataSource.setData(this.dataToDisplay);
       this.setLocation(this.currentLocation);
     });
+
+    this.maxRange = this.tourDataService.getRange();
   }
 
   getUserLocation() {
@@ -61,12 +64,13 @@ export class TourListComponent implements OnInit{
     }
   }
 
-  getInt( dist: string) {
-    return parseInt(dist);
+  getInt(dist: string): boolean {
+    let ret = parseFloat(dist.replace('.','').replace(',','.'))
+    return ret >= this.maxRange;
   }
 
 
-  setLocation(i:number){
+  setLocation(i: number) {
     this.currentLocation = i;
     const x1 = this.dataToDisplay[i].x;
     const y1 = this.dataToDisplay[i].y;
@@ -81,7 +85,7 @@ export class TourListComponent implements OnInit{
     this.dataSource.setData(this.dataToDisplay);
   }
 
-  removeData(i:number) {
+  removeData(i: number) {
     this.dataToDisplay.splice(i, 1);
     this.dataSource.setData(this.dataToDisplay);
   }
@@ -102,7 +106,8 @@ class TourDataSource extends DataSource<Tour> {
     return this._dataStream;
   }
 
-  disconnect() {}
+  disconnect() {
+  }
 
   setData(data: Tour[]) {
     this._dataStream.next(data);

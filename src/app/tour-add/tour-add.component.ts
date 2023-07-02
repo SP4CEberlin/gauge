@@ -9,15 +9,17 @@ import {Router} from "@angular/router";
   selector: 'app-tour-add',
   templateUrl: './tour-add.component.html'
 })
-export class TourAddComponent implements OnInit{
+export class TourAddComponent implements OnInit {
 
   locationForm!: FormGroup;
   address = "";
+
   constructor(
     private formBuilder: FormBuilder,
     private service: GoogleMapsService,
     private tourDataService: TourDataService,
-    private router: Router) {}
+    private router: Router) {
+  }
 
 
   ngOnInit() {
@@ -29,9 +31,16 @@ export class TourAddComponent implements OnInit{
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     let form = this.locationForm.value
-    let tour: Tour = {position: 4, title: 'x-hain', distance: "",  location: '9F4MGC7X%2B4W', x:52.512812,y:13.449813};
+    let tour: Tour = {
+      position: 4,
+      title: 'x-hain',
+      distance: "",
+      location: '9F4MGC7X%2B4W',
+      x: 52.512812,
+      y: 13.449813
+    };
     tour.position = 4;
     tour.title = form.locationInput;
     tour.location = encodeURIComponent(form.plusCodeInput);
@@ -41,7 +50,7 @@ export class TourAddComponent implements OnInit{
     this.router.navigate(['tours'])
   }
 
-  findPlace(){
+  findPlace() {
     this.service.findPlace(this.locationForm.value.locationInput).subscribe({
       next: (place) => {
         // show address so the use can be sure it's correct

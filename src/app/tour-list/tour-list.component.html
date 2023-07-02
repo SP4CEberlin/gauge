@@ -10,7 +10,7 @@
         <button mat-mini-fab color="primary"
                 aria-label="Set location."
                 [style.color]="currentLocation === i ? 'lime' : 'white'"
-                [style.background-color]=" maxRange <= getInt(tour.distance) ? 'red' : '#673ab7'"
+                [style.background-color]="getInt(tour.distance) ? 'red' : '#673ab7'"
                 (click)="setLocation(i)">
           <mat-icon>location_on</mat-icon>
         </button>
@@ -20,7 +20,7 @@
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef>Rating</th>
       <td mat-cell *matCellDef="let tour">
-        <mat-icon *sequence="tour.position" color="primary"> star </mat-icon>
+        <mat-icon *sequence="tour.position" color="primary"> star</mat-icon>
       </td>
     </ng-container>
 
@@ -34,7 +34,7 @@
     <ng-container matColumnDef="distance">
       <th mat-header-cell *matHeaderCellDef>Distance</th>
       <td mat-cell *matCellDef="let tour"
-          [style.color]=" maxRange <= getInt(tour.distance) ? 'red' : 'black'"
+          [style.color]="getInt(tour.distance) ? 'red' : 'black'"
       >
         {{tour.distance}}
         <!-- <mat-icon
@@ -64,9 +64,10 @@
   </table>
 </div>
 <footer *ngIf="showControls">
-    <button class="a-footer-btn"
-            (click)="getUserLocation()"
-            mat-raised-button
-            color="primary">Use current position</button>
+  <button class="a-footer-btn"
+          (click)="getUserLocation()"
+          mat-raised-button
+          color="primary">Use current position
+  </button>
 </footer>
 

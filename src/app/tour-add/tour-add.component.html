@@ -5,48 +5,57 @@
   </mat-card-header>
   <mat-card-content>
     <form class="location-form" [formGroup]="locationForm" (ngSubmit)="onSubmit()">
-      <table class="example-full-width"><tr>
-        <td colspan="2">
-          <mat-form-field class="example-full-width">
-          <mat-label>Location</mat-label>
-          <input matInput formControlName="locationInput">
-          </mat-form-field>
-        </td>
-        <td>
-          <button class="a-footer-btn"
-                  (click)="findPlace()"
-                  mat-button
-                  type="button"
-                  color="primary">Find</button>
-        </td>
-      </tr>
+      <table class="example-full-width">
+        <tr>
+          <td colspan="2">
+            <mat-form-field class="example-full-width">
+              <mat-label>Location</mat-label>
+              <input matInput formControlName="locationInput">
+            </mat-form-field>
+          </td>
+          <td>
+            <button class="a-footer-btn"
+                    (click)="findPlace()"
+                    mat-button
+                    type="button"
+                    color="primary">Find
+            </button>
+          </td>
+        </tr>
         <tr *ngIf="address">
           <td>{{address}}</td>
         </tr>
         <tr>
-        <td><mat-form-field class="example-full-width">
-          <mat-label>Latitude</mat-label>
-          <input matInput
-                 formControlName="latInput"
-                 placeholder="123.345">
-        </mat-form-field></td>
-        <td><mat-form-field class="example-full-width">
-          <mat-label>Longitude</mat-label>
-          <input matInput
-                 formControlName="lonInput"
-                 placeholder="123.456">
-        </mat-form-field></td>
-        <td><mat-form-field class="example-full-width">
-          <mat-label>Maps Plus Code</mat-label>
-          <input matInput
-                 formControlName="plusCodeInput"
-                 #plusCode
-                 maxlength="11"
-                 placeholder="9F4MGC7X+4W"
-                 value="">
-          <mat-hint align="end">{{plusCode.value.length}} / 11</mat-hint>
-        </mat-form-field></td>
-      </tr></table>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>Latitude</mat-label>
+              <input matInput
+                     formControlName="latInput"
+                     placeholder="123.345">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>Longitude</mat-label>
+              <input matInput
+                     formControlName="lonInput"
+                     placeholder="123.456">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>Maps Plus Code</mat-label>
+              <input matInput
+                     formControlName="plusCodeInput"
+                     #plusCode
+                     maxlength="11"
+                     placeholder="9F4MGC7X+4W"
+                     value="">
+              <mat-hint align="end">{{plusCode.value.length}} / 11</mat-hint>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
     </form>
   </mat-card-content>
   <mat-card-actions>
@@ -54,6 +63,7 @@
             mat-raised-button
             type="submit"
             (click)="onSubmit()"
-            color="primary">Add Location</button>
+            color="primary">Add Location
+    </button>
   </mat-card-actions>
 </mat-card>
