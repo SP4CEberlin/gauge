@@ -1,0 +1,11 @@
+.p-wrapper {
+  display: flex;
+  flex: 1 100%;
+}
+
+
+@media all and (max-width: 750px) {
+  .p-wrapper {
+    flex-direction: column;
+  }
+}

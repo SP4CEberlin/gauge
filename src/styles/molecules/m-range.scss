@@ -1,0 +1,22 @@
+.m-range {
+
+  &__header {
+    display: flex;
+  }
+  &__text-box {
+    flex-direction: column;
+    flex: 1 auto;
+    margin: 1rem;
+  }
+
+  &__gauge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__list {
+    width: 100%;
+  }
+}
+

@@ -1,1 +1,35 @@
-<app-gauge-input></app-gauge-input>
+<div class="p-wrapper">
+  <div class="m-range">
+    <div class="m-range__header">
+      <div class="m-range__text-box">
+
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{charge}} % </mat-card-title>
+            <mat-card-subtitle>Charge</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+      <div class="m-range__text-box">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ range.toFixed(2) }} km</mat-card-title>
+            <mat-card-subtitle>Range</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </div>
+    <div class="m-range__gauge">
+      <app-gauge-input
+        [percent]="charge"
+        (percentChange)="onPercentChange($event)"
+      ></app-gauge-input>
+    </div>
+  </div>
+  <div class="m-range__list">
+    <app-tour-list
+      [maxRange]=range
+      [showControls]=false
+    ></app-tour-list>
+  </div>
+</div>

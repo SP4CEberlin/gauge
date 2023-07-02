@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Observable, ReplaySubject } from "rxjs";
 import { DataSource } from "@angular/cdk/collections";
 import { GoogleMapsService } from "../service/google-maps.service";
@@ -10,7 +10,12 @@ import {Tour} from "../interface/tour";
   templateUrl: './tour-list.component.html',
 })
 export class TourListComponent implements OnInit{
-  displayedColumns: string[] = [ 'locButton', 'position', 'title', 'distance', 'trashButton' ];
+
+  @Input() maxRange = 10;
+  @Input() showControls = true;
+
+
+  displayedColumns = [ 'locButton', 'title', 'distance' ];
   dataToDisplay: Tour[] = [];
   dataSource = new TourDataSource(this.dataToDisplay);
   currentLocation = 0;
@@ -20,6 +25,13 @@ export class TourListComponent implements OnInit{
   constructor(private service: GoogleMapsService, private tourDataService: TourDataService) {}
 
   ngOnInit(): void {
+
+    if (this.showControls) {
+      // add more elements
+      this.displayedColumns = [ 'locButton', 'position', 'title', 'distance', 'trashButton' ];
+    }
+
+
     this.tourDataService.getTourData().subscribe(data => {
       this.dataToDisplay = data;
       this.dataSource.setData(this.dataToDisplay);
@@ -49,6 +61,9 @@ export class TourListComponent implements OnInit{
     }
   }
 
+  getInt( dist: string) {
+    return parseInt(dist);
+  }
 
 
   setLocation(i:number){
@@ -70,6 +85,8 @@ export class TourListComponent implements OnInit{
     this.dataToDisplay.splice(i, 1);
     this.dataSource.setData(this.dataToDisplay);
   }
+
+
 }
 
 class TourDataSource extends DataSource<Tour> {
