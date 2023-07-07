@@ -4,6 +4,7 @@ import {DataSource} from "@angular/cdk/collections";
 import {GoogleMapsService} from "../service/google-maps.service";
 import {TourDataService} from "../service/tour-data.service";
 import {Tour} from "../interface/tour";
+import {CacheMapService} from "../service/cache-map.service";
 
 @Component({
   selector: 'app-tour-list',
@@ -22,7 +23,7 @@ export class TourListComponent implements OnInit {
   lat: number = 0;
   lng: number = 0;
 
-  constructor(private service: GoogleMapsService, private tourDataService: TourDataService) {
+  constructor(private mapService: GoogleMapsService, private mapChacheService: CacheMapService, private tourDataService: TourDataService) {
   }
 
   ngOnInit(): void {
@@ -50,7 +51,7 @@ export class TourListComponent implements OnInit {
         this.lng = position.coords.longitude;
         let userPosition = this.lat.toString() + "," + this.lng.toString()
         for (let tourValue of this.dataToDisplay) {
-          this.service.getDistance(tourValue.location, userPosition).subscribe({
+          this.mapService.getDistance(tourValue.location, userPosition).subscribe({
             next: (route) => {
               console.log(JSON.stringify(route, null, 4));
               tourValue.distance = route.rows[0].elements[0].distance.text;
@@ -60,7 +61,7 @@ export class TourListComponent implements OnInit {
         this.dataSource.setData(this.dataToDisplay);
       });
     } else {
-      console.log("User not allow")
+      console.log("User not allowed")
     }
   }
 
@@ -76,12 +77,23 @@ export class TourListComponent implements OnInit {
     const y1 = this.dataToDisplay[i].y;
 
     for (let tourValue of this.dataToDisplay) {
-      this.service.getDistance(tourValue.location, this.dataToDisplay[i].location).subscribe({
-        next: (route) => {
-          tourValue.distance = route.rows[0].elements[0].distance.text;
-        }
-      })
+      // ask cacheService if we know the distance already
+      let cachedDist = this.mapChacheService.getCachedDistance(this.dataToDisplay[i].location , tourValue.location )
+      if (cachedDist){
+        tourValue.distance = cachedDist;
+      } else {
+        // ask map service
+        this.mapService.getDistance(tourValue.location, this.dataToDisplay[i].location).subscribe({
+          next: (route) => {
+            tourValue.distance = route.rows[0].elements[0].distance.text;
+            this.mapChacheService.setCachedDistance( this.dataToDisplay[i].location , tourValue.location , tourValue.distance);
+          }
+        })
+
+
+      }
     }
+
     this.dataSource.setData(this.dataToDisplay);
   }
 
@@ -89,8 +101,6 @@ export class TourListComponent implements OnInit {
     this.dataToDisplay.splice(i, 1);
     this.dataSource.setData(this.dataToDisplay);
   }
-
-
 }
 
 class TourDataSource extends DataSource<Tour> {
