@@ -7,7 +7,21 @@ import {HttpClient} from '@angular/common/http';
 })
 export class GoogleMapsService {
 
-  apiKey = "AIzaSyAXa1dcKOryMKquFrYCXjL7oME-X4kkKiM";
+  /*
+  Please insert your google-Maps API-key below.
+
+  Google API
+  https://developers.google.com/maps/documentation/javascript/get-api-key
+
+  Google Places API
+  https://developers.google.com/maps/documentation/places/web-service/search
+
+  Google Distance Matrix API
+  https://developers.google.com/maps/documentation/distance-matrix/overview
+
+   */
+
+  apiKey = "ENTER_YOUR_API_KEY_HERE!";
 
   constructor(private http: HttpClient) {
   }
@@ -24,3 +38,6 @@ export class GoogleMapsService {
   }
 
 }
+
+
+

@@ -16,8 +16,7 @@ export class TourDataService {
     {position: 4, title: 'Eierhäuschen', distance: "", location: '9F4MFFJV%2BGP', x: 52.481437, y: 13.494813},
     {position: 4, title: 'C-Base', distance: "", location: '9F4MGC7C%2B52', x: 52.512937, y: 13.420063},
     {position: 4, title: 'x-hain', distance: "", location: '9F4MGC7X%2B4W', x: 52.512812, y: 13.449813},
-    {position: 4, title: 'Eifelturm', distance: "", location: '8FW4V75V%2B8Q', x: 48.8583, y: 2.2944813},
-
+    {position: 4, title: 'Motion Lab', distance: "", location: '9F4MFCVX%2B87', x: 52.512812, y: 13.449813},
   ];
 
   rangeValue: number = 9;
